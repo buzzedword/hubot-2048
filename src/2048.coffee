@@ -319,23 +319,25 @@ Renderer::setMsg = (msg) ->
 Renderer::renderHorizontalLine = (length) ->
   self = this
   i = 0
-  message = '-'
+  message = '`-'
   while i < length
     message += '--'
     i++
+  message += '`'
   self.msg.send message
 
 Renderer::render = (grid, metadata) ->
   self = this;
   self.renderHorizontalLine grid.cells.length
   grid.cells.forEach (column) ->
-    message = '|'
+    message = '`|'
     column.forEach (cell) ->
       value = if cell then cell.value else ' '
       message += value + '|'
+    message += '`'
     self.msg.send message
   self.renderHorizontalLine grid.cells.length
-  self.msg.send "Score: #{metadata.score}"
+  self.msg.send "`Score: #{metadata.score}`"
 
 
 gameManagerKey = 'gameManager'
